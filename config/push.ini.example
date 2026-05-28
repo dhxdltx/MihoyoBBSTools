@@ -2,7 +2,7 @@
 enable=true
 # 共有 cqhttp ftqq(sever酱) pushplus pushme telegram wecom dingrobot feishubot
 # bark pushdeer gotify smtp(邮件推送) webhook qmsg(qq消息推送) WinToast(Win11通知)
-# serverchan3
+# serverchan3 wcc(wecomchan推送服务)
 push_server=pushplus
 # server酱 pushplus dingrobot 的推送token
 push_token=XXXXXX
@@ -12,6 +12,14 @@ push_block_keys=
 error_push_only=false
 # PushPlus推送指定群组
 topic=
+
+[wcc]
+wccurl=https://test.demo.com/wecomchan
+#wecomchan服务器端地址，与企业微信端对接需在wecomchan服务器端配置。
+sendkey=123
+#wecomchan服务端设置的key,建议设置一个较复杂key避免被意外盗用。
+msg_type=text
+to_user=@all
 
 [pushme]
 token = 填写你的pushme的token
