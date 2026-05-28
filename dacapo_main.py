@@ -289,6 +289,15 @@ class DaCapoAdapter:
                         "chat_id": ""
                     }
                 },
+                "wcc": {
+                    "section": "wcc",
+                    "config": {
+                        "wccurl": "",
+                        "sendkey": "",
+                        "msg_type": "",
+                        "to_user": ""
+                    }
+                },
                 "wecom": {
                     "section": "wecom",
                     "config": {

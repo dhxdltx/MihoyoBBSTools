@@ -210,6 +210,24 @@ class PushHandler:
         server.close()
         log.info("邮件发送成功啦")
 
+    def wcc(self, status_id, push_message):
+        """
+        使用wecomchan推送到企业微信by dhxdltx@github
+        """
+        wccurl = self.cfg.get('wcc', 'wccurl')
+        sendkey = self.cfg.get('wcc', 'sendkey')
+        msg_type = self.cfg.get('wcc', 'msg_type')
+        to_user = self.cfg.get('wcc', 'to_user')
+        self.http.get(
+            url=wccurl,
+            params={
+                "sendkey": sendkey,
+                "msg_type": msg_type,
+                "to_user": to_user,
+                "msg": get_push_title(status_id) + "\n" + (push_message)
+            }
+        )
+    
     def wecom(self, status_id, push_message):
         """
         企业微信推送
@@ -493,10 +511,12 @@ class PushHandler:
         if self.cfg.getboolean('setting', 'error_push_only', fallback=False) and status == 0:
             return 0
         log.info("正在执行推送......")
+        
         func_names = self.cfg.get('setting', 'push_server').lower()
         push_success = True
         for func_name in func_names.split(","):
             func = getattr(self, func_name, None)
+            log.warning(f"读取的推送服务名称: {func_names}")
             if not func:
                 log.warning(f"推送服务名称错误：{func_name}")
                 continue
